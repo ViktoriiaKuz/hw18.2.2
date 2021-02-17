@@ -11,7 +11,6 @@ public class Main {
         Thread jewerely = new Thread(jewerelyShop);
         jewerely.start();
 
-
         System.out.println("клиенты идут");
 
     }
