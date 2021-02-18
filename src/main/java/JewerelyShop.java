@@ -1,8 +1,11 @@
 
 
 public class JewerelyShop implements Runnable {
-    ClientManager clientManager = new ClientManager();
+    ClientManager clientManager;
 
+    public JewerelyShop(ClientManager clientManager) {
+        this.clientManager = clientManager;
+    }
 
 
     public void run() {
@@ -11,9 +14,7 @@ public class JewerelyShop implements Runnable {
         while (true) {
 
             try {
-                for (int i = 1; i < 6; i++) {
-                    clientManager.run();
-                }
+
 
                 Thread.sleep(30000);
 
