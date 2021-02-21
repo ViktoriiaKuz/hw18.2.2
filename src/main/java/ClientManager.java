@@ -11,8 +11,10 @@ public class ClientManager implements Runnable {
 
 
                 try {
+                    Random number2 = new Random();
+                    int timeSpent = number2.nextInt(8000 - 1000) + 1000;
                     System.out.println( "  зашел в магазин");
-                    Thread.sleep(8000);
+                    Thread.sleep(timeSpent);
                     System.out.println( "  вышел");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
