@@ -1,35 +1,38 @@
 
 
 public class JewerelyShop implements Runnable {
-    ClientManager clientManager;
-
-    public JewerelyShop(ClientManager clientManager) {
-        this.clientManager = clientManager;
-    }
 
 
-    public void run() {
-        System.out.println("открылся магазин");
-
-        while (true) {
-
-            try {
+    boolean isOpen;
 
 
-                Thread.sleep(30000);
 
-                System.out.println("перерыв");
+        public void run () {
+            while (true) {
+                isOpen = true;
+                System.out.println("открылся магазин");
+                try {
 
-                System.out.println("все уходят");
 
-                Thread.sleep(10000);
+                    Thread.sleep(30000);
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+                isOpen = false;
+                System.out.println("перерыв, все уходят");
+                try {
+
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
             }
-
-
         }
 
     }
-}

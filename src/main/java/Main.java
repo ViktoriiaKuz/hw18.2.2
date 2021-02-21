@@ -1,4 +1,15 @@
+import java.util.Random;
+
 /**
+ * В городе успешно работает ювелирный магазин,
+ * так как к магазину постоянно приходят клиенты.
+ * Из-за карантина в магазине не может одновременно находится больше 5 клиентов.
+ * Клиенты прохотят мимо магазина 1 раз в 2-5 секунд и заходят в магазин
+ * если он открыт и в нем есть место. Иначе клиент уходит.
+ * Магазин закрывается на 10-секундный перерыв один раз в 30 секунд.
+ * В перерыв все клиенты выходят из магазина и новые не могут зайти.
+ * Каждый клиент находится в магазине в промежутке от 1 до 8 секунд.
+ * <p>
  * Ситуация "клиент заходит, уходит, и только потом заходит новый"
  * возникает из-за того что в JewelryShop в методе run у clientManager
  * вызывается метод run. Сам по себе метод run не работает в другом потоке.
@@ -12,25 +23,34 @@
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         ClientManager clientManager = new ClientManager();
-        JewerelyShop jewerelyShop = new JewerelyShop(clientManager);
+
+        JewerelyShop jewerelyShop = new JewerelyShop();
 
 
         Thread jewerely = new Thread(jewerelyShop);
         jewerely.start();
 
-        for (int i = 1; i < 6; i++) {
-            Thread client = new Thread(clientManager);
-            client.start();
+        while (true) {
+
+            for (int i = 1; i < 6; i++) {
+                if (jewerelyShop.isOpen) {
+                    Thread client = new Thread(clientManager);
+                    System.out.println(i + "клиент");
+                    client.start();
+                    Thread.sleep(5000);
+
+                }
+                else {
+                    Thread.sleep(5000);
+                }
+
+            }
         }
-
-        System.out.println("клиенты идут");
-
     }
 }
-
-
+//}
 
 
